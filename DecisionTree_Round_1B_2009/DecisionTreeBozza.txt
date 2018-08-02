@@ -1,0 +1,76 @@
+String pise = "(0.2furry(0.81fast(0.3)(0.2))(0.1fishy(0.3freshwater(0.01)(0.01))(0.1)))";
+String pise2 = String.substring(pise, 1, pise.len - 1);
+String primoFat = String.substr(pise2, 0, pise.indexof('(') - 1);
+double primoMolt = Double.parseDouble(String.substr(primoFat,0,primoFat.indexof(' ') - 1));
+String primoCar = String.substr(primoFat, primoFat.indexOf(' '));
+
+
+
+stati:
+0:init
+1:riconoscere parentesi
+2:riconosciuto molt
+3:riconosciuto nome
+3b:no nome (foglia)
+4:riconosciuti sottorami
+
+public class Tree {
+	int stato = 0;
+	String moltstr;
+	double molt;
+	String caratteristica;
+	Tree primo;
+	Tree secondo;
+}
+
+public calcWeight(Tree tree, String[] categories) {
+	if(è una foglia quindi primo e secondo == null)
+		return mult;
+	return tree.molt * calcWeight((categories.contains(tree.caratteristica) ? tree.primo : tree.secondo), categories);
+}
+
+public Tree parse(String daparstare) {
+	Tree currentTree = new Tree(0);
+	for(tutti i caratteri) {
+		switch(currentTree.stato) {
+			case '0': {
+				if(se è '(') {
+					currentTree.stato++;
+				}
+			}
+			case '1': {
+				if(carattere è una lettera) {
+					currentTree.caratteristica += carattere;
+					currentTree.molt = Double.parseDouble(currentTree.moltstr);
+					currentTree.stato++;
+				} else 
+					if(carattere è ')') {
+						//è foglia
+						return currentTree;
+					} else
+						moltstr += carattere;
+			}
+			case '2': {
+				if(carattere è '(') {
+					currentTree.primo = parse(da qua in poi);
+					currentTree.stato++;
+				} else
+					caratteristica += carattere;
+			}
+			case '3': {
+				if(carattere è '(') {
+					currentTree.secondo = parse(da qua in poi);
+					currentTree.stato++;
+				} else
+					ci sono problemi
+			}
+			case '4': {
+				if(carattere è ')')
+					return currentTree;
+			}
+		}
+		if(se è '(') {
+			currentTree = new Tree(0);
+		}
+	}
+}
